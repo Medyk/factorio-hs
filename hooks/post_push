@@ -1,0 +1,9 @@
+#!/bin/bash
+
+LATEST_STABLE=$(curl -s https://factorio.com/api/latest-releases | jq -r '.stable.headless')
+
+if [[ "$LATEST_STABLE" == "$DOCKER_TAG" ]]
+then
+    docker tag $IMAGE_NAME $DOCKER_REPO:stable
+    docker push $DOCKER_REPO:stable
+fi
