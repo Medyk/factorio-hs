@@ -1,0 +1,12 @@
+services:
+  factorio-hs:
+    container_name: factorio-hs
+    image: ${DOCKER_REPOSITORY}/medyk/factorio-hs:${FACTORIO_VERSION}
+    restart: always
+    labels:
+      - "com.factorio.version=${FACTORIO_VERSION}"
+    stop_grace_period: 60s
+    ports:
+      - "34197:34197/udp"
+    volumes:
+      - ./volumes/factorio:/factorio
