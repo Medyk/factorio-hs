@@ -5,8 +5,10 @@ ARG VERSION
 RUN cd /opt \
  && apt-get -q update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -qy wget xz-utils tar \
- && wget -q -O factorio-headless-${VERSION}.tar.xz https://www.factorio.com/get-download/${VERSION}/headless/linux64 \
- && tar -xJf factorio-headless-${VERSION}.tar.xz
+ && wget -q -O factorio_headless_x64_${VERSION}.tar.xz https://www.factorio.com/get-download/${VERSION}/headless/linux64 \
+ && wget -q -O sha256sums.txt https://www.factorio.com/download/sha256sums/ \
+ && sha256sum --ignore-missing -c sha256sums.txt \
+ && tar -xJf factorio_headless_x64_${VERSION}.tar.xz
 
 
 FROM debian:stable-slim
