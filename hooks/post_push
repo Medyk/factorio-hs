@@ -1,6 +1,7 @@
 #!/bin/bash
 
-LATEST_STABLE=$(curl -s https://factorio.com/api/latest-releases | jq -r '.stable.headless')
+# LATEST_STABLE=$(curl -s https://factorio.com/api/latest-releases | jq -r '.stable.headless')
+LATEST_STABLE=$(curl -s https://factorio.com/api/latest-releases | grep -o '"stable":{[^}]*' | grep -o '"headless":"[^"]*' | sed -n 's/.*"headless":"\([^"]*\)/\1/p')
 
 if [[ "$LATEST_STABLE" == "$DOCKER_TAG" ]]
 then
